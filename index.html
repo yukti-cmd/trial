@@ -1,62 +1,83 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Sorry ❤️</title>
-
-<style>
-body{
-    background:#0d1117;
-    color:#00ff88;
-    font-family:monospace;
-    padding:40px;
-    font-size:20px;
-}
-.cursor{
-    animation: blink 1s infinite;
-}
-@keyframes blink{
-    50%{opacity:0;}
-}
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sorry Sweetheart ❤️</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div id="text"></div>
+<div class="container">
+
+    <div class="cute-face">🥺</div>
+
+    <h1 class="typing">Sorry Sweetheart ❤️</h1>
+
+    <p class="subtitle">
+        I never wanted to hurt you...
+    </p>
+
+    <div id="heart" class="heart">
+        ❤️
+    </div>
+
+    <p class="click-text">
+        Tap My Heart ❤️
+    </p>
+
+    <div id="finalMessage" class="hidden">
+        <h2>Will You Forgive Me? 🥺❤️</h2>
+        <p>
+            Because my world is prettier when you're smiling.
+        </p>
+    </div>
+
+</div>
+
+<div id="fireworks"></div>
 
 <script>
-const msg = `> Initializing Apology.exe...
 
-Loading...
-██████████ 100%
+const heart = document.getElementById("heart");
+const fireworks = document.getElementById("fireworks");
+const finalMessage = document.getElementById("finalMessage");
 
-ERROR DETECTED 💔
-Reason: I hurt someone special.
+heart.addEventListener("click", () => {
 
-Applying Fix...
+    heart.classList.add("explode");
 
-while(you_are_upset){
-    say("I'm sorry 🥺");
-    care_for_you();
-}
+    for(let i=0;i<60;i++){
 
-Status: Waiting for forgiveness ❤️
+        const particle = document.createElement("div");
 
-if(you_forgive_me){
-    happiness = true;
-}`;
-    
-let i = 0;
-function type(){
-    if(i < msg.length){
-        document.getElementById("text").innerHTML += msg.charAt(i);
-        i++;
-        setTimeout(type, 40);
-    }else{
-        document.getElementById("text").innerHTML += '<span class="cursor">|</span>';
+        particle.classList.add("particle");
+
+        particle.innerHTML =
+            ["💖","💕","💗","❤️","💞","✨"][Math.floor(Math.random()*6)];
+
+        particle.style.left = "50%";
+        particle.style.top = "50%";
+
+        particle.style.setProperty("--x",
+            `${(Math.random()-0.5)*900}px`);
+
+        particle.style.setProperty("--y",
+            `${(Math.random()-0.5)*900}px`);
+
+        fireworks.appendChild(particle);
+
+        setTimeout(()=>{
+            particle.remove();
+        },3000);
     }
-}
-type();
+
+    setTimeout(()=>{
+        finalMessage.classList.add("show");
+    },1000);
+
+});
+
 </script>
 
 </body>
